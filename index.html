@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sujeet Solanki — Resume</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F4EC;
+    --ink:#20301C;
+    --leaf:#33502A;
+    --olive:#5B6B3C;
+    --soil:#8A5A34;
+    --wheat:#C79A2E;
+    --line: rgba(32,48,28,0.16);
+    --card: #FFFFFF;
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    font-size:15px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .sheet{
+    max-width:960px;
+    margin:0 auto;
+    padding:56px 56px 72px;
+    background:
+      linear-gradient(var(--paper), var(--paper));
+    position:relative;
+  }
+
+  /* faint field-row texture in the background, like tilled rows */
+  .sheet::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image: repeating-linear-gradient(
+      180deg,
+      rgba(90,110,60,0.035) 0px,
+      rgba(90,110,60,0.035) 1px,
+      transparent 1px,
+      transparent 34px
+    );
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .sheet > *{ position:relative; z-index:1; }
+
+  /* ============ HEADER / SPECIMEN LABEL ============ */
+  .label-tag{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--leaf);
+    background: rgba(51,80,42,0.08);
+    border:1px solid rgba(51,80,42,0.25);
+    padding:5px 12px;
+    border-radius:3px;
+  }
+  .label-tag .dot{
+    width:6px; height:6px; border-radius:50%;
+    background:var(--wheat);
+    display:inline-block;
+  }
+
+  header.hero{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:24px;
+    border-bottom:2px solid var(--ink);
+    padding-bottom:22px;
+    margin-bottom:8px;
+  }
+
+  h1.name{
+    font-family:'Fraunces', serif;
+    font-optical-sizing:auto;
+    font-weight:600;
+    font-size:52px;
+    line-height:1;
+    margin:14px 0 6px;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+  }
+
+  .role-line{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    letter-spacing:0.05em;
+    color:var(--soil);
+    text-transform:uppercase;
+  }
+
+  .contact-block{
+    text-align:right;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:var(--olive);
+    line-height:1.9;
+    white-space:nowrap;
+  }
+  .contact-block a{ color:var(--olive); text-decoration:none; border-bottom:1px dotted var(--olive); }
+
+  /* ============ SECTION HEADERS ============ */
+  .section{ margin-top:38px; }
+
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    margin-bottom:16px;
+  }
+  .section-head .idx{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--wheat);
+    background:var(--ink);
+    padding:2px 7px;
+    border-radius:2px;
+    letter-spacing:0.05em;
+  }
+  .section-head h2{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:22px;
+    margin:0;
+    color:var(--ink);
+  }
+  .section-head .rule{
+    flex:1;
+    height:1px;
+    background:var(--line);
+  }
+
+  /* ============ SUMMARY ============ */
+  .summary{
+    font-size:15.5px;
+    color:var(--ink);
+    max-width:760px;
+    border-left:3px solid var(--wheat);
+    padding-left:18px;
+  }
+
+  /* ============ COMPETENCIES — sample record grid ============ */
+  .comp-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px 22px;
+  }
+  .comp-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:14px 16px;
+  }
+  .comp-card .cat{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--soil);
+    display:flex;
+    align-items:center;
+    gap:7px;
+    margin-bottom:8px;
+  }
+  .comp-card .cat::before{
+    content:"";
+    width:8px; height:8px;
+    background:var(--leaf);
+    display:inline-block;
+    border-radius:1px;
+  }
+  .comp-card p{
+    margin:0;
+    font-size:13.6px;
+    color:var(--ink);
+    line-height:1.6;
+  }
+
+  /* ============ EXPERIENCE — growth timeline ============ */
+  .timeline{
+    position:relative;
+    padding-left:28px;
+    margin-top:6px;
+  }
+  .timeline::before{
+    content:"";
+    position:absolute;
+    left:5px; top:6px; bottom:6px;
+    width:2px;
+    background:linear-gradient(var(--leaf), var(--line));
+  }
+
+  .job{
+    position:relative;
+    margin-bottom:34px;
+  }
+  .job:last-child{ margin-bottom:0; }
+
+  .job::before{
+    content:"";
+    position:absolute;
+    left:-28px;
+    top:5px;
+    width:12px; height:12px;
+    border-radius:50%;
+    background:var(--paper);
+    border:2.5px solid var(--leaf);
+  }
+  .job.current::before{
+    background:var(--wheat);
+    border-color:var(--leaf);
+  }
+
+  .job-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    flex-wrap:wrap;
+    gap:6px 16px;
+  }
+
+  .job-title{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:18px;
+    color:var(--ink);
+  }
+
+  .job-meta{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--soil);
+  }
+
+  .job-org{
+    font-size:13.5px;
+    color:var(--olive);
+    font-weight:600;
+    margin:2px 0 10px;
+  }
+
+  ul.job-list{
+    margin:0;
+    padding-left:18px;
+  }
+  ul.job-list li{
+    margin-bottom:7px;
+    font-size:14px;
+    color:var(--ink);
+  }
+  ul.job-list li::marker{
+    color:var(--wheat);
+  }
+
+  .rec-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10px;
+    letter-spacing:0.08em;
+    color:var(--leaf);
+    background:rgba(51,80,42,0.08);
+    border:1px solid rgba(51,80,42,0.2);
+    padding:2px 8px;
+    border-radius:3px;
+    text-transform:uppercase;
+  }
+
+  /* ============ EDUCATION ============ */
+  .edu-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+  }
+  .edu-card{
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:16px 18px;
+    background:var(--card);
+    border-top:3px solid var(--leaf);
+  }
+  .edu-card .deg{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:16px;
+    margin-bottom:4px;
+    color:var(--ink);
+  }
+  .edu-card .school{
+    font-size:13px;
+    color:var(--olive);
+    margin-bottom:8px;
+  }
+  .edu-card .meta-row{
+    display:flex;
+    justify-content:space-between;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:var(--soil);
+  }
+
+  /* ============ FOOTER SEAL ============ */
+  .seal{
+    margin-top:44px;
+    padding-top:18px;
+    border-top:1px dashed var(--line);
+    text-align:center;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--olive);
+  }
+
+  @media (max-width:700px){
+    .sheet{ padding:32px 22px 48px; }
+    header.hero{ flex-direction:column; align-items:flex-start; }
+    .contact-block{ text-align:left; }
+    h1.name{ font-size:38px; }
+    .comp-grid, .edu-grid{ grid-template-columns:1fr; }
+    .job-top{ flex-direction:column; }
+  }
+
+  @media print{
+    body{ background:white; }
+    .sheet::before{ display:none; }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <header class="hero">
+    <div>
+      <span class="label-tag"><span class="dot"></span>Quality Record — Verified Profile</span>
+      <h1 class="name">Sujeet Solanki</h1>
+      <div class="role-line">Senior Quality Control &amp; Assurance · Seed Science</div>
+    </div>
+    <div class="contact-block">
+      Indore, MP 452001<br>
+      +91 8959545111<br>
+      <a href="mailto:sujeetsolanki0609@gmail.com">sujeetsolanki0609@gmail.com</a><br>
+      <a href="https://www.linkedin.com/in/sujeet-solanki-784894356?trk=universal-search-cluster">linkedin.com/in/sujeet-solanki</a>
+    </div>
+  </header>
+
+  <section class="section">
+    <p class="summary">
+      Data-driven and rigorous Senior Quality Control &amp; Assurance professional with over 5 years of
+      progressive experience specializing in Seed Science, agricultural compliance, and process
+      optimization. Proven track record leading cross-functional QA/QC operations, executing field
+      audits, and leveraging ERP systems to maintain strict compliance with ISTA and Indian Seed
+      Certification standards. Expert in utilizing advanced statistical data analysis to mitigate
+      production nonconformities, manage R&amp;D Grow-Out Tests (GOT), and drive operational efficiency
+      across large-scale commercial agricultural pipelines.
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="idx">01</span>
+      <h2>Core Competencies</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="comp-grid">
+      <div class="comp-card">
+        <div class="cat">QA / QC &amp; Compliance</div>
+        <p>ISTA Standards · Indian Seed Certification Standards · Physical Purity Testing · Moisture &amp; Germination Testing · Quality Audits · SOPs</p>
+      </div>
+      <div class="comp-card">
+        <div class="cat">Agronomic Operations</div>
+        <p>Grow-Out Tests (GOT) · Crop Protection · Nutrient Management · Disease &amp; Pest Analysis · Field Inspection · Performance Trials</p>
+      </div>
+      <div class="comp-card">
+        <div class="cat">Data &amp; Systems</div>
+        <p>Enterprise Resource Planning (ERP) · Advanced MS Excel (Validation, Reporting, Visualization) · Cross-Lab Record Analysis · Technical Documentation</p>
+      </div>
+      <div class="comp-card">
+        <div class="cat">Crop Expertise</div>
+        <p>Hybrid Field Crops — Paddy, Maize, Wheat, Soybean, Cotton, Mustard · Vegetable Crops — Onion, Okra, Green Gram, Chili, Tomato, Brinjal</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="idx">02</span>
+      <h2>Professional Experience</h2>
+      <div class="rule"></div>
+    </div>
+
+    <div class="timeline">
+
+      <div class="job current">
+        <div class="job-top">
+          <div class="job-title">Senior Quality Control Officer</div>
+          <div class="job-meta">Oct 2025 – Present</div>
+        </div>
+        <div class="job-org">Eagle Seeds and Biotech Pvt Ltd · Indore, M.P. <span class="rec-tag">Current</span></div>
+        <ul class="job-list">
+          <li>Formally appointed as Coordinator of Lab Head for testing activities and R&amp;D Coordinator for Grow-Out Tests (GOT), directing complete field inspections and process control measures.</li>
+          <li>Spearheaded integration of cross-laboratory record testing via ERP systems to standardize multi-laboratory data streams and ensure rigorous traceability.</li>
+          <li>Designed and executed high-precision seed treatment experiments and continuous quality audits across production, processing, and final product release phases.</li>
+          <li>Minimized plant processing nonconformities by establishing bi-weekly automated QA reporting metrics during peak seasons, evaluating crop and hybrid health status.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-top">
+          <div class="job-title">Quality Control Officer</div>
+          <div class="job-meta">Mar 2023 – Sep 2025</div>
+        </div>
+        <div class="job-org">Eagle Seeds and Biotech Pvt Ltd · Indore, M.P.</div>
+        <ul class="job-list">
+          <li>Executed end-to-end seed sampling, laboratory testing, and technical quality evaluations across 12+ distinct field and vegetable crop profiles to achieve strict corporate quality targets.</li>
+          <li>Guaranteed 100% compliance of commercial dispatches with ISTA and Indian Seed Certification protocols through meticulous laboratory record keeping and field data monitoring.</li>
+          <li>Managed multi-environment field emergence tests, performance trials, and comprehensive crop management activities to validate seed purity and vigor under varying field conditions.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-top">
+          <div class="job-title">Senior Farm Advisor</div>
+          <div class="job-meta">Mar 2022 – Mar 2023</div>
+        </div>
+        <div class="job-org">Gramophone · Indore, M.P.</div>
+        <ul class="job-list">
+          <li>Directed field advisory teams to deliver precision technical support to regional farming networks regarding disease epidemiology, pest control, and balanced nutrient management.</li>
+          <li>Accelerated product adoption and customer loyalty by structuring data-driven crop solutions, field demonstrations, and operational extension programs.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-top">
+          <div class="job-title">Marketing Development Officer</div>
+          <div class="job-meta">Jul 2021 – Feb 2022</div>
+        </div>
+        <div class="job-org">Corteva Agriscience · Maheshwar, M.P.</div>
+        <ul class="job-list">
+          <li>Launched localized technical product campaigns, managed territory distributor orders, and compiled regional farmer trends using advanced Excel visualization tools.</li>
+          <li>Accelerated product positioning and maximized market penetration for premium seed portfolios via targeted multi-stakeholder field interaction programs.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-top">
+          <div class="job-title">Marketing Development Officer</div>
+          <div class="job-meta">Jan 2021 – Jul 2021</div>
+        </div>
+        <div class="job-org">Calix Agri Genetics Pvt. Ltd. · Barwah, M.P.</div>
+        <ul class="job-list">
+          <li>Organized focused farmer educational meetings, product launches, and field trials while systematically maintaining distributor supply-chain data arrays within MS Excel.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="idx">03</span>
+      <h2>Education</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="deg">M.Sc. in Agriculture — Seed Science &amp; Technology</div>
+        <div class="school">Hemavati Nandan Bahuguna Garhwal University · Srinagar, Uttarakhand</div>
+        <div class="meta-row"><span>Graduated Sep 2020</span><span>7.7 CGPA</span></div>
+      </div>
+      <div class="edu-card">
+        <div class="deg">B.Sc. in Seed Technology</div>
+        <div class="school">DAVV Indore · Indore, Madhya Pradesh</div>
+        <div class="meta-row"><span>Graduated May 2018</span><span>68%</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="seal">Record compiled · ISTA-aligned quality documentation · Indore, Madhya Pradesh</div>
+
+</div>
+</body>
+</html>
